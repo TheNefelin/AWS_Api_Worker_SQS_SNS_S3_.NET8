@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ClassLibrary_Infrastructure.Services;
 
-public class AwsSqsService
+public class AwsSqsService : IAwsSqsService
 {
     private readonly ILogger<AwsSqsService> _logger;
     private readonly IAmazonSQS _sqsClient;
@@ -22,7 +22,7 @@ public class AwsSqsService
     {
         try
         {
-            var request = new ReceiveMessageRequest
+            var receiveMessageRequest = new ReceiveMessageRequest
             {
                 QueueUrl = _awsSettings.SqsUrl,
                 MaxNumberOfMessages = maxMessages,
@@ -30,10 +30,10 @@ public class AwsSqsService
                 MessageAttributeNames = new List<string> { "All" }
             };
 
-            var response = await _sqsClient.ReceiveMessageAsync(request);
-            _logger.LogInformation("[AwsSqsService] Mensajes recibidos de SQS: {MessageCount}", response.Messages.Count);
+            var receiveMessageResponse = await _sqsClient.ReceiveMessageAsync(receiveMessageRequest);
+            _logger.LogInformation("[AwsSqsService] Mensajes recibidos de SQS: {MessageCount}", receiveMessageResponse.Messages.Count);
 
-            return response.Messages;
+            return receiveMessageResponse.Messages;
         }
         catch (Exception ex)
         {
@@ -46,13 +46,13 @@ public class AwsSqsService
     {
         try
         {
-            var deleteRequest = new DeleteMessageRequest
+            var deleteMessageRequest = new DeleteMessageRequest
             {
                 QueueUrl = _awsSettings.SqsUrl,
                 ReceiptHandle = receiptHandle
             };
 
-            await _sqsClient.DeleteMessageAsync(deleteRequest);
+            await _sqsClient.DeleteMessageAsync(deleteMessageRequest);
             _logger.LogDebug("[AwsSqsService] Mensaje eliminado de SQS exitosamente");
         }
         catch (Exception ex)

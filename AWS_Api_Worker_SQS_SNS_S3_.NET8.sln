@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary_Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary_Domain", "ClassLibrary_Domain\ClassLibrary_Domain.csproj", "{170CD21E-C6CE-45F9-8121-D1DBCE6AC44B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWS_WebApp", "AWS_WebApp\AWS_WebApp.csproj", "{0A6BD400-6852-4624-9105-337F4C9FF46A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{170CD21E-C6CE-45F9-8121-D1DBCE6AC44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170CD21E-C6CE-45F9-8121-D1DBCE6AC44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170CD21E-C6CE-45F9-8121-D1DBCE6AC44B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A6BD400-6852-4624-9105-337F4C9FF46A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6BD400-6852-4624-9105-337F4C9FF46A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6BD400-6852-4624-9105-337F4C9FF46A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6BD400-6852-4624-9105-337F4C9FF46A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

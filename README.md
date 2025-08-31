@@ -12,11 +12,13 @@ AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/
 │	├── Dockerfile
 │	└── Program.cs
 │
-├── AWS_WebWorker/
-│	├── Controllers/
-│	│	├── CompaniesController.cs
-│	│	├── DonationController.cs
-│	│	└── ProductsController.cs
+├── AWS_WebApp/
+│	├── wwwroot
+│	│	└── index.html
+│	├── Hubs/
+│	│	└── ConsoleHub.cs
+│	├── Services/
+│	│	└── ConsoleNotifier.cs
 │	├── Dockerfile
 │	└── Program.cs
 │
@@ -34,8 +36,11 @@ AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/
 │		├── CompanyService.cs
 │		├── DonationService.cs
 │		├── ICompanyService.cs
+│		├── IConsoleNotifier.cs
 │		├── IDonationService.cs
+│		├── IMessageProcessorService.cs
 │		├── IProductService.cs
+│		├── MessageProcessorService.cs
 │		└── ProductService.cs
 │
 ├── ClassLibrary_Domain/
@@ -52,6 +57,7 @@ AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/
 │	├── Data
 │	│	└── AppDbContext.cs
 │	├── Models
+│	│	├── AwsSnsDonation.cs
 │	│	├── AwsSnsEmail.cs
 │	│	├── AwsSnsMessage.cs
 │	│	└── AwsSnsMessageByEmail.cs
