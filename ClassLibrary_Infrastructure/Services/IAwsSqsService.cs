@@ -1,5 +1,9 @@
-﻿namespace ClassLibrary_Infrastructure.Services;
+﻿using Amazon.SQS.Model;
 
-internal interface IAwsSqsService
+namespace ClassLibrary_Infrastructure.Services;
+
+public interface IAwsSqsService
 {
+    Task<List<Message>> ReceiveMessagesAsync(int maxMessages = 10, int waitTimeSeconds = 20);
+    Task DeleteMessageAsync(string receiptHandle);
 }
