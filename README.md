@@ -18,7 +18,8 @@ AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/
 │	├── Hubs/
 │	│	└── ConsoleHub.cs
 │	├── Services/
-│	│	└── ConsoleNotifier.cs
+│	│	├── ConsoleNotifier.cs
+│	│	└── SqsBackgroundService.cs
 │	├── Dockerfile
 │	└── Program.cs
 │
@@ -38,9 +39,7 @@ AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/
 │		├── ICompanyService.cs
 │		├── IConsoleNotifier.cs
 │		├── IDonationService.cs
-│		├── IMessageProcessorService.cs
 │		├── IProductService.cs
-│		├── MessageProcessorService.cs
 │		└── ProductService.cs
 │
 ├── ClassLibrary_Domain/

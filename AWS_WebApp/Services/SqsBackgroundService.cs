@@ -89,7 +89,7 @@ public class SqsBackgroundService : BackgroundService
             }
             catch (Exception ex)
             {
-                await _consoleNotifier.SendConsoleMessage($"❌ Error en SQS Service: {ex.Message}");
+                //await _consoleNotifier.SendConsoleMessage($"❌ Error en SQS Service: {ex.Message}");
                 _logger.LogError(ex, "Error en SqsBackgroundService");
 
                 // Pausa más larga en caso de error
