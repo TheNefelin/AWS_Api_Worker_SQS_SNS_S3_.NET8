@@ -1,5 +1,5 @@
-﻿using ClassLibrary_Core.Entities;
-using ClassLibrary_Core.Interfaces;
+﻿using ClassLibrary_Domain.Entities;
+using ClassLibrary_Domain.Interfaces;
 using ClassLibrary_Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

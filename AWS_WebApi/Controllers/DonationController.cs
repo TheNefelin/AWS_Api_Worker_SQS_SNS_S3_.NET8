@@ -1,4 +1,5 @@
-﻿using ClassLibrary_Application.Models;
+﻿using ClassLibrary_Application.DTOs;
+using ClassLibrary_Application.Models;
 using ClassLibrary_Application.Services;
 using ClassLibrary_Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ public class DonationController : ControllerBase
     }
 
     [HttpPost("subscribe")]
-    public async Task<ActionResult<ApiResponse<string>>> Subscribe([FromForm] AwsSnsEmail awsSnsEmail)
+    public async Task<ActionResult<ApiResponse<string>>> Subscribe(AwsSnsEmail awsSnsEmail)
     {
         _logger.LogInformation("[DonationsController] - Subscribing email: {Email}", awsSnsEmail.Email);
         var apiResponse = await _donationService.SubscribeEmailAsync(awsSnsEmail);
@@ -27,10 +28,18 @@ public class DonationController : ControllerBase
     }
 
     [HttpPost("unsubscribe")]
-    public async Task<ActionResult<ApiResponse<string>>> Unsubscribe([FromForm] AwsSnsEmail awsSnsEmail)
+    public async Task<ActionResult<ApiResponse<string>>> Unsubscribe(AwsSnsEmail awsSnsEmail)
     {
         _logger.LogInformation("[DonationsController] - Unsubscribing email: {Email}", awsSnsEmail.Email);
         var apiResponse = await _donationService.UnsubscribeEmailAsync(awsSnsEmail);
+        return StatusCode(apiResponse.StatusCode, apiResponse);
+    }
+
+    [HttpPost("donate")]
+    public async Task<ActionResult<ApiResponse<string>>> SendDonationNotification(AwsSnsDonation awsSnsDonation)
+    {
+        _logger.LogInformation("[DonationsController] - Sending donation notification to email: {Email}", awsSnsDonation.Email);
+        var apiResponse = await _donationService.SendDonationNotificationAsync(awsSnsDonation);
         return StatusCode(apiResponse.StatusCode, apiResponse);
     }
 

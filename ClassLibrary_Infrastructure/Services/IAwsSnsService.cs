@@ -9,5 +9,6 @@ public interface IAwsSnsService
     public Task<SubscribeResponse> SubscribeEmailAsync(AwsSnsEmail awsSnsEmail);
     public Task<UnsubscribeResponse> UnsubscribeAsync(Subscription subscription);
     public Task<PublishResponse> PublishMassiveMessageAsync(AwsSnsMessage awsSnsMessage);
+    public Task<PublishResponse> PublishDonationMessageAsync(AwsSnsDonation awsSnsDonation);
     public Task<PublishResponse> PublishMessageByEmailAsync(AwsSnsMessageByEmail awsSnsMessageByEmail);
 }

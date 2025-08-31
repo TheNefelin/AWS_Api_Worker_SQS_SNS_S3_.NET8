@@ -1,5 +1,5 @@
 ﻿using ClassLibrary_Application.DTOs;
-using ClassLibrary_Core.Entities;
+using ClassLibrary_Domain.Entities;
 
 namespace ClassLibrary_Application.Mappers;
 

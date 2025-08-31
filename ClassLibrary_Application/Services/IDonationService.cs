@@ -8,5 +8,5 @@ public interface IDonationService
     public Task<ApiResponse<string>> SubscribeEmailAsync(AwsSnsEmail awsSnsEmail);
     public Task<ApiResponse<Object>> UnsubscribeEmailAsync(AwsSnsEmail awsSnsEmail);
     public Task<ApiResponse<string>> SendMassiveNotificationAsync(AwsSnsMessage awsSnsMessage);
-    public Task<ApiResponse<string>> SendDonationNotificationByEmailAsync(AwsSnsMessageByEmail awsSnsMessageByEmail);
+    public Task<ApiResponse<string>> SendDonationNotificationAsync(AwsSnsDonation awsSnsDonation);
 }

@@ -1,4 +1,4 @@
-﻿using ClassLibrary_Core.Entities;
+﻿using ClassLibrary_Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClassLibrary_Infrastructure.Data;

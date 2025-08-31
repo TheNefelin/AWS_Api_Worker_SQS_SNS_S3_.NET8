@@ -1,6 +1,6 @@
-﻿using ClassLibrary_Core.Entities;
+﻿using ClassLibrary_Domain.Entities;
 
-namespace ClassLibrary_Core.Interfaces;
+namespace ClassLibrary_Domain.Interfaces;
 
 public interface ICompanyRepository
 {

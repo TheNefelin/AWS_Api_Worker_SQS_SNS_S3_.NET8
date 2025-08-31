@@ -130,10 +130,44 @@ public class DonationService : IDonationService
         }
     }
 
-    public async Task<ApiResponse<string>> SendDonationNotificationByEmailAsync(AwsSnsMessageByEmail awsSnsMessageByEmail)
+    public async Task<ApiResponse<string>> SendDonationNotificationAsync(AwsSnsDonation awsSnsDonation)
     {
         try
         {
+            var publishResponse = await _awsSnsService.PublishDonationMessageAsync(awsSnsDonation);
+
+            return new ApiResponse<string>
+            {
+                IsSuccess = true,
+                StatusCode = 200,
+                Message = $"Notificación masiva enviada con éxito [{publishResponse.MessageId}].",
+                Data = publishResponse.MessageId
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error enviando notificación masiva");
+
+            return new ApiResponse<string>
+            {
+                IsSuccess = false,
+                StatusCode = 500,
+                Message = $"An error occurred: {ex.Message}"
+            };
+        }
+    }
+
+    public async Task<ApiResponse<string>> SendDonationNotificationByEmailAsync(AwsSnsDonation awsSnsDonation)
+    {
+        try
+        {
+            var awsSnsMessageByEmail = new AwsSnsMessageByEmail
+            { 
+                Email = awsSnsDonation.Email,
+                Subject = "Donacion",
+                Message = awsSnsDonation.Amount.ToString(),
+            };  
+
             var publishResponse = await _awsSnsService.PublishMessageByEmailAsync(awsSnsMessageByEmail);
 
             return new ApiResponse<string>
@@ -146,7 +180,7 @@ public class DonationService : IDonationService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error enviando recibo de donación a: {Email}", awsSnsMessageByEmail.Email);
+            _logger.LogError(ex, "Error enviando recibo de donación a: {Email}", awsSnsDonation.Email);
 
             return new ApiResponse<string>
             {

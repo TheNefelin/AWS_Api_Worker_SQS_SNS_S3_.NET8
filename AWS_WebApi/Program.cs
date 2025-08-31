@@ -1,7 +1,7 @@
 using Amazon;
 using Amazon.SimpleNotificationService;
 using ClassLibrary_Application.Services;
-using ClassLibrary_Core.Interfaces;
+using ClassLibrary_Domain.Interfaces;
 using ClassLibrary_Infrastructure.Config;
 using ClassLibrary_Infrastructure.Data;
 using ClassLibrary_Infrastructure.Repositories;

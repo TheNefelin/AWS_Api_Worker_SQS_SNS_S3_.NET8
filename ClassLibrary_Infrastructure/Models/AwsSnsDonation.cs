@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ClassLibrary_Application.Models;
+namespace ClassLibrary_Infrastructure.Models;
 
-public class Donation
+public class AwsSnsDonation
 {
     [EmailAddress]
     public required string Email { get; set; }

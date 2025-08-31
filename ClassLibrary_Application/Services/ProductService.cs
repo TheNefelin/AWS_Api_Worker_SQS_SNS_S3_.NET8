@@ -1,7 +1,7 @@
 ﻿using ClassLibrary_Application.DTOs;
 using ClassLibrary_Application.Mappers;
 using ClassLibrary_Application.Models;
-using ClassLibrary_Core.Interfaces;
+using ClassLibrary_Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace ClassLibrary_Application.Services;

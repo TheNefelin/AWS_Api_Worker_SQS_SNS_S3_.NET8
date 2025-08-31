@@ -58,7 +58,7 @@ public class AwsSnsService : IAwsSnsService
             };
 
             // Crea la solicitud de suscripción
-            var request = new SubscribeRequest
+            var subscribeRequest = new SubscribeRequest
             {
                 TopicArn = _awsSettings.SnsTopicArn,
                 Protocol = "email",
@@ -66,7 +66,7 @@ public class AwsSnsService : IAwsSnsService
                 Attributes = attributes
             };
 
-            var response = await _snsClient.SubscribeAsync(request);
+            var response = await _snsClient.SubscribeAsync(subscribeRequest);
             _logger.LogInformation("[AwsSnsService] Email suscrito a SNS: {Email}, ARN: {SubscriptionArn}", awsSnsEmail.Email, response.SubscriptionArn);
             return response;
         }
@@ -95,18 +95,18 @@ public class AwsSnsService : IAwsSnsService
     public async Task<PublishResponse> PublishMassiveMessageAsync(AwsSnsMessage awsSnsMessage)
     {
         var messageAttributes = new Dictionary<string, MessageAttributeValue>
+        {
             {
+                "target",
+                new MessageAttributeValue
                 {
-                    "target",
-                    new MessageAttributeValue
-                    {
-                        DataType = "String",
-                        StringValue = "all"
-                    }
+                    DataType = "String",
+                    StringValue = "all"
                 }
-            };
+            }
+        };
 
-        var request = new PublishRequest
+        var publishRequest = new PublishRequest
         {
             TopicArn = _awsSettings.SnsTopicArn,
             Subject = awsSnsMessage.Subject,
@@ -114,24 +114,51 @@ public class AwsSnsService : IAwsSnsService
             MessageAttributes = messageAttributes
         };
 
-        return await PublishMessageAsync(request);
+        return await PublishMessageAsync(publishRequest);
+    }
+
+    public async Task<PublishResponse> PublishDonationMessageAsync(AwsSnsDonation awsSnsDonation)
+    {
+        var messageAttributes = new Dictionary<string, MessageAttributeValue>
+        {
+            {
+                "action",
+                new MessageAttributeValue
+                {
+                    DataType = "String",
+                    StringValue = "process"
+                }
+            }
+        };
+
+        var message = JsonConvert.SerializeObject(awsSnsDonation);
+
+        var publishRequest = new PublishRequest
+        {
+            TopicArn = _awsSettings.SnsTopicArn,
+            Subject = "Donation",
+            Message = message,
+            MessageAttributes = messageAttributes
+        };
+
+        return await PublishMessageAsync(publishRequest);
     }
 
     public async Task<PublishResponse> PublishMessageByEmailAsync(AwsSnsMessageByEmail awsSnsMessageByEmail)
     {
         var messageAttributes = new Dictionary<string, MessageAttributeValue>
+        {
             {
+                "target",
+                new MessageAttributeValue
                 {
-                    "target",
-                    new MessageAttributeValue
-                    {
-                        DataType = "String",
-                        StringValue = awsSnsMessageByEmail.Email
-                    }
+                    DataType = "String",
+                    StringValue = awsSnsMessageByEmail.Email
                 }
-            };
+            }
+        };
 
-        var request = new PublishRequest
+        var publishRequest = new PublishRequest
         {
             TopicArn = _awsSettings.SnsTopicArn,
             Subject = awsSnsMessageByEmail.Subject,
@@ -139,7 +166,7 @@ public class AwsSnsService : IAwsSnsService
             MessageAttributes = messageAttributes
         };
 
-        return await PublishMessageAsync(request);
+        return await PublishMessageAsync(publishRequest);
     }
 
     private async Task<PublishResponse> PublishMessageAsync(PublishRequest publishRequest)
