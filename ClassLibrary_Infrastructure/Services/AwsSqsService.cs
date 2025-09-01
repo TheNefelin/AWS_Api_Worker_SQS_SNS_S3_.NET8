@@ -31,9 +31,17 @@ public class AwsSqsService : IAwsSqsService
             };
 
             var receiveMessageResponse = await _sqsClient.ReceiveMessageAsync(receiveMessageRequest);
-            _logger.LogInformation("[AwsSqsService] Mensajes recibidos de SQS: {MessageCount}", receiveMessageResponse.Messages.Count);
 
-            return receiveMessageResponse.Messages;
+            if (receiveMessageResponse == null)
+            {
+                _logger.LogWarning("[AwsSqsService] Respuesta de SQS es null");
+                return new List<Message>();
+            }
+
+            var messages = receiveMessageResponse.Messages ?? new List<Message>();
+            _logger.LogInformation("[AwsSqsService] Mensajes recibidos de SQS: {MessageCount}", messages.Count);
+
+            return messages;
         }
         catch (Exception ex)
         {

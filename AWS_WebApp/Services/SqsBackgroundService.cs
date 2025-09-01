@@ -46,30 +46,9 @@ public class SqsBackgroundService : BackgroundService
                     foreach (var message in messages)
                     {
                         // Mostrar detalles del mensaje
-                        await _consoleNotifier.SendConsoleMessage($"🆔 Message ID: {message.MessageId}");
-                        await _consoleNotifier.SendConsoleMessage($"📝 Body: {message.Body}");
-
-                        // Mostrar atributos si existen
-                        if (message.MessageAttributes.Any())
-                        {
-                            await _consoleNotifier.SendConsoleMessage("📊 Atributos:");
-                            foreach (var attr in message.MessageAttributes)
-                            {
-                                await _consoleNotifier.SendConsoleMessage($"   • {attr.Key}: {attr.Value.StringValue}");
-                            }
-                        }
-
-                        // Aquí puedes agregar lógica de procesamiento
-                        await _consoleNotifier.SendConsoleMessage("⚙️ Procesando mensaje...");
-
-                        // Simular procesamiento
-                        await Task.Delay(500, stoppingToken);
-
-                        await _consoleNotifier.SendConsoleMessage("✅ Mensaje procesado correctamente");
-
-                        // Eliminar mensaje de SQS después de procesarlo
-                        await sqsService.DeleteMessageAsync(message.ReceiptHandle);
-                        await _consoleNotifier.SendConsoleMessage($"🗑️ Mensaje {message.MessageId} eliminado de SQS");
+                        using var messageScope = _serviceProvider.CreateScope();
+                        var donationProcessor = messageScope.ServiceProvider.GetRequiredService<IDonationProcessor>();
+                        await donationProcessor.ProcessDonationAsync(message);
                     }
 
                     await _consoleNotifier.SendConsoleMessage("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
@@ -90,6 +69,7 @@ public class SqsBackgroundService : BackgroundService
             catch (Exception ex)
             {
                 //await _consoleNotifier.SendConsoleMessage($"❌ Error en SQS Service: {ex.Message}");
+                await _consoleNotifier.SendConsoleMessage($"❌ Error en SQS Service: {ex}");
                 _logger.LogError(ex, "Error en SqsBackgroundService");
 
                 // Pausa más larga en caso de error

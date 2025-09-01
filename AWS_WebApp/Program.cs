@@ -31,13 +31,14 @@ var awsSettings = new AwsSettings
 builder.Services.AddSingleton(awsSettings);
 builder.Services.AddSingleton<IAmazonSimpleNotificationService>(new AmazonSimpleNotificationServiceClient(awsRegion));
 builder.Services.AddSingleton<IAmazonSQS>(new AmazonSQSClient(awsRegion));
-builder.Services.AddSingleton<IAwsSnsService, AwsSnsService>();
-builder.Services.AddSingleton<IAwsSqsService, AwsSqsService>();
+builder.Services.AddScoped<IAwsSnsService, AwsSnsService>();
+builder.Services.AddScoped<IAwsSqsService, AwsSqsService>();
 
 // ============================================================================
 // CONFIGURACIÓN DE SERVICIOS
 // ============================================================================
 builder.Services.AddSignalR();
+builder.Services.AddScoped<IDonationProcessor, DonationProcessor>();
 builder.Services.AddSingleton<IConsoleNotifier, ConsoleNotifier>();
 builder.Services.AddHostedService<SqsBackgroundService>();
 
