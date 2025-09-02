@@ -1,5 +1,10 @@
 ﻿# AWS WebApi Worker (SQS + SNS + S3) .NET 8
 
+```sh
+tr -d '\r' < run_docker_aws.sh > run_docker_aws_fixed.sh
+sh run_docker_aws_fixed.sh
+```
+
 ### Project Structure
 ```
 AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/

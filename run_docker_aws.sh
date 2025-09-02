@@ -13,12 +13,12 @@ git clone https://github.com/TheNefelin/AWS_Api_Worker_SQS_SNS_S3_.NET8.git
 cd AWS_Api_Worker_SQS_SNS_S3_.NET8
 
 # Build de imágenes
-docker build -t aws_webapi:1.0 ./AWS_WebApi
+docker build -f AWS_WebApi/Dockerfile -t aws_webapi:latest .
 
 # Limpiar solo cache intermedia
 docker builder prune -f
 
-docker build -t aws_webapp:1.0 ./AWS_WebApp
+docker build -f AWS_WebApp/Dockerfile -t aws_webapp:latest .
 
 # Limpiar solo cache intermedia
 docker builder prune -f
