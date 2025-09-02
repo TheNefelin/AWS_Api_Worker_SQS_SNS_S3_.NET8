@@ -1,0 +1,34 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/out/
+*.exe
+*.dll
+*.pdb
+
+# IDE / tooling
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Configs y docs que no son necesarios en runtime
+*.md
+*.sql
+*.sh
+docker-compose*
+*.yml
+*.yaml
+
+# Otros
+*.db
+*.log
+*.cache
+*.tmp
+*.swp

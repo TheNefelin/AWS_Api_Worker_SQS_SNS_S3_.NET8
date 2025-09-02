@@ -7,8 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWS_WebApi", "AWS_WebApi\AW
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		PostgreSQL.sql = PostgreSQL.sql
 		README.md = README.md
+		run_all.bat = run_all.bat
+		run_docker.bat = run_docker.bat
+		run_docker_aws.sh = run_docker_aws.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary_Application", "ClassLibrary_Application\ClassLibrary_Application.csproj", "{11715C74-7910-43D8-8586-E5094C611201}"
@@ -18,8 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary_Domain", "ClassLibrary_Domain\ClassLibrary_Domain.csproj", "{170CD21E-C6CE-45F9-8121-D1DBCE6AC44B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWS_WebApp", "AWS_WebApp\AWS_WebApp.csproj", "{0A6BD400-6852-4624-9105-337F4C9FF46A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,9 +52,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFCF2218-4472-4044-A57A-F16792F6A8F8}
