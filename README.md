@@ -88,6 +88,12 @@ var AWS_SNS_TOPIC_ARN = builder.Configuration["AWS_SNS_TOPIC_ARN"] ?? "arn:aws:s
 ```
 - WebApp
 ```csharp
+var DB_HOST = builder.Configuration["DB_HOST"] ?? "localhost";
+var DB_PORT = builder.Configuration["DB_PORT"] ?? "5432";
+var DB_NAME = builder.Configuration["DB_NAME"] ?? "postgres";
+var DB_USER = builder.Configuration["DB_USER"] ?? "postgres";
+var DB_PASS = builder.Configuration["DB_PASS"] ?? "testing";
+
 var AWS_REGION = builder.Configuration["AWS_REGION"] ?? "us-east-1";
 var AWS_SQS_URL = builder.Configuration["AWS_SQS_URL"] ?? "https://sqs.us-east-1.amazonaws.com/123/my-sqs";
 var AWS_SNS_TOPIC_ARN = builder.Configuration["AWS_SNS_TOPIC_ARN"] ?? "arn:aws:sns:us-east-1:123:my-sns";
@@ -95,9 +101,62 @@ var AWS_S3_BUCKET_NAME = builder.Configuration["AWS_S3_BUCKET_NAME"] ?? "monolit
 ```
 
 # AWS - Amazon Web Services
+## Seciruty Group
+### SG RDS
+- **Name**: monolito-sg-rds
+- **Inbound rules**:
+  - PostgreSQL
+    - Type: PostgreSQL
+    - Port range: 5432
+    - Destination: 0.0.0.0/0
+
+### SG WEB
+- **Name**: monolito-sg-web
+- **Inbound rules**:
+  - SSH
+    - Type: SSH
+    - Port range: 22
+    - Destination: 0.0.0.0/0
+  - HTTP
+    - Type: HTTP
+    - Port range: 80
+    - Destination: 0.0.0.0/0
+
+## S3 Bucket
+### Bucket
+- **Name**: monolito-storage
+- **Block all public access**: check
+
+```bash
+monolito-storage/
+├── docs/
+└── images/
+```
+
+## RDS
+### PostgreSQL
+- **Engine type**: PostgreSQL
+- **DB instance**: monolito-pgdb-rds
+- **Master username**: postgres
+- **Credentials management**: ********
+- **Instance configuration**: db.t3.micro
+- **Allocated storage**: 20 GiB
+- **Security groups**: monolito-sg-rds 
+
 ## SQS
+### Topics
+- **Type**: Standard
+- **Name**: monolito-sqs
+- **Visibility timeout**: 30 Seconds
+- **Message retention period**: 4 Days
+- **Delivery delay**: 0
+- **Receive message wait time**: 0
+- **Maximum message size**: 1024 KiB
 
 ## SNS
+### Topics
+- **Topics**: Standard
+- **Name**: monolito-sns
 
 ## Subscription
 - Subscription filter policy (SQS)

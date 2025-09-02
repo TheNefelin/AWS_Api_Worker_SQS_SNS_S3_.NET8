@@ -8,5 +8,5 @@ public class AwsSqsDonationMessage
     public string Email { get; set; }
 
     [JsonPropertyName("Amount")]
-    public decimal Amount { get; set; }
+    public int Amount { get; set; }
 }
