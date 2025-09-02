@@ -16,16 +16,22 @@ cd AWS_Api_Worker_SQS_SNS_S3_.NET8
 docker build -f AWS_WebApi/Dockerfile -t aws_webapi:latest .
 
 # Limpiar solo cache intermedia
+df -h
 docker builder prune -f
+df -h
 
 docker build -f AWS_WebApp/Dockerfile -t aws_webapp:latest .
 
 # Limpiar solo cache intermedia
+df -h
 docker builder prune -f
+df -h
 
 # Mostrar espacio después de builds
-df -h
+df -hclear
 
 # Limpiar carpeta clonada
 cd ..
 rm -rf AWS_Api_Worker_SQS_SNS_S3_.NET8
+
+docker images

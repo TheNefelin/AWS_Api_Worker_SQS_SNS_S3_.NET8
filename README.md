@@ -1,10 +1,5 @@
 ﻿# AWS WebApi Worker (SQS + SNS + S3) .NET 8
 
-```sh
-tr -d '\r' < run_docker_aws.sh > run_docker_aws_fixed.sh
-sh run_docker_aws_fixed.sh
-```
-
 ### Project Structure
 ```
 AWS_ApiWeb_Worker_SQS_SNS_S3_.NET8/
@@ -188,6 +183,44 @@ monolito-storage/
     "all"
   ]
 }
+```
+
+---
+
+# Docker-Compose
+- Construir y levantar AWS_WebApi AWS_WebApp con docker-compose
+```sh
+docker-compose up -d
+```
+- Reconstruir y levantar AWS_WebApi AWS_WebApp con docker-compose
+```sh
+docker-compose up -d --build
+```
+- Detener imagenes
+```sh
+docker-compose down
+```
+- Destruir imagenes
+```sh
+docker images
+docker rmi aws_webapi aws_webapp
+```
+
+# Docker
+
+- Construir y levantar AWS_WebApi
+```sh
+docker build -f AWS_WebApi/Dockerfile -t aws_webapi:latest .
+```
+```sh
+docker run -d -p 8081:8080 --name AWS_WebApi aws_webapi:latest 
+```
+- Construir y levantar AWS_WebApp
+```sh
+docker build -f AWS_WebApp/Dockerfile -t aws_webapp:latest .
+```
+```sh
+docker run -d -p 8080:8080 --name AWS_WebApp aws_webapp:latest
 ```
 
 ---

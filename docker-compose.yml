@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  webapi:
+    build:
+      context: .
+      dockerfile: AWS_WebApi/Dockerfile
+    image: aws_webapi:latest
+    container_name: AWS_WebApi
+    ports:
+      - "8081:8080"
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASS: testing
+      AWS_REGION: us-east-1
+      AWS_SNS_TOPIC_ARN: arn:aws:sns:us-east-1:123:my-sns
+
+  webapp:
+    build:
+      context: .
+      dockerfile: AWS_WebApp/Dockerfile
+    image: aws_webapp:latest
+    container_name: AWS_WebApp
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASS: testing
+      AWS_REGION: us-east-1
+      AWS_SQS_URL: https://sqs.us-east-1.amazonaws.com/123/my-sqs
+      AWS_SNS_TOPIC_ARN: arn:aws:sns:us-east-1:123:my-sns
+      AWS_S3_BUCKET_NAME: monolito-storage
