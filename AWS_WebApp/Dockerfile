@@ -5,7 +5,7 @@ WORKDIR /src
 # Copiar solo el .csproj primero (optimiza cache)
 COPY ["AWS_Api_Worker_SQS_SNS_S3_.NET8.sln", "."]
 COPY ["AWS_WebApp/AWS_WebApp.csproj", "AWS_WebApp/"]
-RUN dotnet restore "AWS_Api_Worker_SQS_SNS_S3_.NET8.sln"
+RUN dotnet restore "AWS_WebApp/AWS_WebApp.csproj"
 
 # Copiar el resto del código
 COPY . .

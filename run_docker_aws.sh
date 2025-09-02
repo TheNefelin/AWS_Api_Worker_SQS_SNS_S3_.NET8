@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Limpiar Docker (opcional, solo contenedores y recursos huérfanos)
-docker system prune -f
+docker system prune -a --volumes -f
 
 # Mostrar espacio disponible
 df -h
